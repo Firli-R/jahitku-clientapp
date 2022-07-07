@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <meta th:name="_csrf" th:content="${_csrf.token}" />
+</head>
+
+<body>
+    <!-- navbar -->
+    <header th:replace="homepage/index :: header"></header>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-6 card mb-4 mt-5">
+            <nav>
+                <div class="nav nav-tabs d-flex justify-content-center " id="nav-tab" role="tablist">
+                    <a class="nav-link text-center flex-fill" id="nav-home-tab" th:href="@{/login}" style="color: #EDB13B;">Login</a>
+                    <a class="nav-link active flex-fill text-center" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Sign Up</a>
+                </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <form th:action="@{/register}" th:object="${registerData}" th:method="POST">
+                        <div class="row justify-content-center mt-3 needs-validation" novalidate>
+                            <div class="col-md-8 col-sm-6 m-2">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" th:field="*{username}" class="form-control" required/>
+                                <div class="invalid-feedback" id="username-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 col-sm-6 m-2">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" th:field="*{password}" class="form-control" required />
+                                <div class="invalid-feedback"> Password Kurang dari 6 karakter
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center ">
+                            <div class="col-md-4 col-sm-3 " style="margin-top: -5px; ">
+                                <input type="checkbox" id="showPass" style="margin-right: 5px;" />Show Password
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-md-8 col-sm-6 m-2">
+                                <label for="nama" class="form-label">Nama</label>
+                                <input type="text" th:field="*{nama}" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-md-8 col-sm-6 m-2">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="number" th:field="*{phone}" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-md-8 col-sm-6 m-2">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" th:field="*{email}" class="form-control" required />
+                                <div class="invalid-feedback" id="email-feedback">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-md-8 col-sm-6 m-2">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <textarea type="text" th:field="*{alamat}" class="form-control" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center mb-3">
+                                <div class="col-md-8 col-sm-6 text-center">
+                                    <button class="btn btn-warning mt-2" type="submit" id="submitRegis">Sign Up</button>
+                                </div>
+                            </div>
+                    </form>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="homepage/index :: footer">
+        </footer>
+
+        <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <!-- Core plugin JavaScript-->
+        <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+        <script th:src="@{/js/sweetalert.min.js}"></script>
+        <!-- <script th:src="@{/js/validation-field.js}"></script> -->
+        <script>
+            let error = $("#password").text();
+            if (error.length <= 5) {
+                // $("#password").addClass("is-invalid");
+                $("#feedback").text("Password karakter kurang dari 5");
+            } else if (error.length > 5 || error.length == 0) {
+                $("#password").removeClass("is-invalid");
+            }
+
+            $("#showPass").click(function() {
+                if ($("#password").attr("type") === "password") {
+                    $("#password").attr("type", "text");
+                } else {
+                    $("#password").attr("type", "password");
+                }
+            });
+
+            function passwordClick() {
+                let passwordField = $("#password").val();
+                if (passwordField.length <= 5) {
+                    window.stop();
+                    if ($("#password").hasClass("is-invalid")) {
+                        $("#password").removeClass("is-invalid");
+                    } else {
+                        $("#password").addClass("is-invalid");
+                    }
+
+                } else if (passwordField.length > 5) {
+                    $("#password").removeClass("is-invalid");
+                    $("#password").addClass("is-valid");
+                }
+            }
+
+            function validasiUsername() {
+                let username = $("#username").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/validation/" + username,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status === "success") {
+                            window.stop();
+                            $("#username").addClass("is-invalid");
+                            $("#username-feedback").text("Username Already Taken");
+
+                        } else if (response.status === "error") {
+                            $("#username").removeClass("is-invalid");
+                            $("#username").addClass("is-valid");
+                        }
+                    }
+                });
+
+            }
+
+            function validasiEmail() {
+                let email = $("#email").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/validationEmail/" + email,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status === "success") {
+                            window.stop();
+                            $("#email").addClass("is-invalid");
+                            $("#email-feedback").text("Email Already Taken");
+                        } else {
+                            $("#email").removeClass("is-invalid");
+                            $("#email").addClass("is-valid");
+                        }
+                    }
+                });
+            }
+            $("#submitRegis").click(function(e) {
+                validasiUsername();
+                validasiEmail();
+                passwordClick();
+            });
+        </script>
+
+
+</body>
+
+</html>

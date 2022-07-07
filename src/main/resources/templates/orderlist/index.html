@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-dashboard">
+        <a class="nav-link" th:href="@{/dashboard}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-order">
+        <a class="nav-link active" th:href="@{/order/admin}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-orderlist">
+        <a class="nav-link active" th:href="@{/orderlist}">
+            <i class="fas fa-folder"></i>
+            <span>Order List</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-jenisjahitan">
+        <a class="nav-link " th:href="@{/jenisjahitan}">
+            <i class="fas fa-table"></i>
+            <span>Jenis Jahitan</span></a>
+    </li>
+    <!--    <h1 layout:fragment="heading-name">Status Pesanan</h1>-->
+
+    <div layout:fragment="content">
+
+        <div class="card col-sm-12 col-md-12">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h3>Order List</h3>
+                </div>
+                <a class="btn btn-sm btn-success" th:href="@{/order/admin}" onclick="setOrderId(null)">Create New</a>
+
+            </div>
+
+            <div class="card-body col-sm-12 col-md-12">
+                <table class="table table-striped w-100" id="orderTable">
+                    <thead>
+                        <tr>
+                            <th>Order No</th>
+                            <th>Nama Customer</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Tanggal Selesai</th>
+                            <th>Status Pembayaran</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--  Modal Form-->
+    <div class="modal fade" id="orderListModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" layout:fragment="sub_content">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row needs-validation" id="orderListForm">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="badge bg-primary text-white" style="font-size: 30px;" id="nomerOrder">No Order</h3>
+                                <h3 id="status">Status</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 mt-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="col-sm-12 col-md-8 mt-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="col-sm-12 col-md-8 mt-3">
+                            <label for="lokasi" class="form-label">Lokasi Barang</label>
+                            <input type="text" class="form-control" id="lokasi" name="lokasi">
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="tanggalMasuk" class="form-label">Tanggal Masuk</label>
+                            <input class="form-control" type="datetime-local" name="tanggalMasuk" id="tanggalMasuk">
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="tanggalSelesai" class="form-label">Tanggal Selesai</label>
+                            <input class="form-control" type="datetime-local" name="tanggalSelesai" id="tanggalSelesai">
+                        </div>
+                        <div class="col-12 mt-3">
+                            <label for="jenisJahitan" class="form-label">Jenis Jahitan:</label>
+                            <div class="card-body">
+                                <table class="table table-striped w-100" id="orderModalTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Keterangan</th>
+                                            <th>Jumlah</th>
+                                            <th>Harga</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="formBody">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 mt-3">
+                            <label for="total" class="form-label">Total Rp.</label>
+                            <input type="number" class="form-control" name="total" id="total">
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="statusPembayaran" class="form-label">Status Pembayaran</label>
+                            <select class="form-select form-control" id="statusPembayaran" name="statusPembayaran">
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="statusPemesanan" class="form-label">Status Pemesanan</label>
+                            <select class="form-select form-control" id="statusPemesanan" name="statusPemesanan">
+
+                            </select>
+                        </div>
+
+                </div>
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-success d-none" id="editButton" onclick="setDetailToUpdate()">Edit</button>
+                    <button type="submit" class="btn btn-primary" id="submitButton" data-bs-dismiss="modal">Simpan
+                        Perubahan
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="setOrderId(null)">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block layout:fragment="script_content">
+        <script th:src="@{/js/orderList/index.js}"></script>
+    </th:block>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Jahitan</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+
+<body>
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-dashboard">
+        <a class="nav-link" th:href="@{/dashboard}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-order">
+        <a class="nav-link active" th:href="@{/order/admin}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-orderlist">
+        <a class="nav-link" th:href="@{/orderlist}">
+            <i class="fas fa-folder"></i>
+            <span>Order List</span></a>
+    </li>
+
+
+    <li layout:fragment="link-jenisjahitan">
+        <a class="nav-link active" th:href="@{/jenisjahitan}">
+            <i class="fas fa-table"></i>
+            <span>Jenis Jahitan</span></a>
+    </li>
+    <h1 layout:fragment="heading-name">Order Jahitan</h1>
+
+    <div layout:fragment="content">
+
+        <div class="row">
+            <div col-sm-6>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h3>Detail Order</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <label for="exampleInputEmail1" class="form-label">Jenis Jahitan</label>
+                        <div class="mb-3">
+                            <select class="form-select form-control" type="button" aria-label="Jenis Jahitan" id="jenisJahitanId">
+                                <option selected disabled value="">Pilih jenis jahitan</option>
+                                <!-- <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option> -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Jumlah</label>
+                            <input type="number" class="form-control" name="kuantitas" id="kuantitas">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Keterangan</label>
+                            <textarea class="form-control" id="keterangan" rows="3"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="onAdd()">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div col-sm-6>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h3>Orderan Anda</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div>
+                            <ul class="list-group" id="orderList">
+                            </ul>
+                        </div>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-success" onclick="onOrder()">Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block layout:fragment="script_content">
+            <script th:src="@{/js/ordercustomer/index.js}"></script>
+        </th:block>
+</body>
+
+</html>

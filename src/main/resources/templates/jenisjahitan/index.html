@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenis Jahitan Page</title>
+</head>
+
+<body>
+
+
+    <li layout:fragment="link-home">
+        <a class="nav-link" th:href="@{/dashboard}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-order">
+        <a class="nav-link" th:href="@{/order/admin}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-orderlist">
+        <a class="nav-link" th:href="@{/orderlist}">
+            <i class="fas fa-folder"></i>
+            <span>Order List</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-jenisjahitan">
+        <a class="nav-link " th:href="@{/jenisjahitan}">
+            <i class="fas fa-table"></i>
+            <span>Jenis Jahitan</span></a>
+    </li>
+
+
+
+    <div layout:fragment="content">
+        <div class="card col-md-6">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h3>Jenis Jahitan</h3>
+                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jenisJahitanModal" onclick="setJenisJahitanId(null)">Create New</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-striped w-100" id="jenisJahitanTable">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--  Modal Form-->
+    <div class="modal fade" id="jenisJahitanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" layout:fragment="sub_content">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Jenis Jahitan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row needs-validation" id="jenisJahitanForm">
+                        <div class="col-12">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="modal-footer mt-3">
+                            <button type="button" class="btn btn-success d-none" id="editButton" onclick="setDetailToUpdate()">Edit</button>
+                            <button type="submit" class="btn btn-primary" id="submitButton" data-bs-dismiss="modal">Submit
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block layout:fragment="script_content">
+        <script th:src="@{/js/jenisjahitan/index.js}"></script>
+    </th:block>
+
+</body>
+
+</html>

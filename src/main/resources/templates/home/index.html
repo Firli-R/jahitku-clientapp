@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link th:href="@{/css/carousel.css}" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+        .content-1 {
+            font-family: "Quicksand", sans-serif;
+            border-radius: 1em;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            background-color: #F4F0F0;
+        }
+        
+        #wrapper {
+            margin-top: -48px;
+            margin-bottom: -48px;
+        }
+    </style>
+</head>
+
+<body>
+    <span layout:fragment="name-user" th:text="${name.getName()}">
+    </span>
+    <li layout:fragment="link-home">
+        <a class="nav-link active" th:href="@{/home}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+    </li>
+
+    <li layout:fragment="link-order">
+        <a class="nav-link" th:href="@{/order}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-status">
+        <a class="nav-link" th:href="@{/status}">
+            <i class="fas fa-table"></i>
+            <span>Status Pesanan</span></a>
+    </li>
+
+    <li layout:fragment="link-profile">
+        <a class="nav-link" th:href="@{/profile}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span></a>
+    </li>
+
+    <div layout:fragment="content">
+        <h1>Selamat Datang,
+            <span th:text="${name.getName()}"></span>
+        </h1>
+        <div class="mx-2" id="gallery">
+            <!-- Three columns of text below the carousel -->
+            <h3 class="m-3 text-center" style="font-size: 20px;"><strong>Jasa yang kami Tawarkan</strong> </h3>
+            <div class="row justify-content-center p-5 content-1 mb-4 ml-3" style="color: black; font-weight: bold;">
+                <div class="col-lg-3">
+                    <img th:src="@{/img/Tailor-img3.png}" alt="" style="width: 70%">
+
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>1</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start align-self-center mt-2">
+                            <p class="container ms-1">Pemotongan</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col-lg-3 -->
+                <div class="col-lg-3 ">
+                    <img th:src="@{/img/Tailor-img4.png}" alt="" style="width: 70%;height: 70%;">
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>2</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start align-self-center mt-2">
+                            <p class="container ms-1">Pembelian Pakaian</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col-lg-3 -->
+                <div class="col-lg-3 ">
+                    <img th:src="@{/img/Tailor-img8.jpg}" alt="" style="width: 70%; height: 77%;">
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>3</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start align-self-center mt-2">
+                            <p class="container ms-1">Pembuatan Seragam</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col-lg-3 -->
+                <div class="col-lg-3 ">
+                    <img th:src="@{/img/Tailor-img5.png}" alt="" style="width: 70%;height: 70%;">
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>4</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start">
+                            <p class="container ms-1 align-self-center mt-2">Pengecilan Pakaian</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-12 text-center mt-5 mb-5">
+                    <a class="btn btn-warning " style="font-weight: bold; color: black;" th:href="@{/order}">Order</a>
+                </div>
+
+                <div class="col-lg-3">
+                    <img th:src="@{/img/Tailor-img6.png}" alt="" style="width: 70%">
+
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>5</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start align-self-center mt-2">
+                            <p class="container ms-1">Pemasangan Kancing</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col-lg-3 -->
+                <div class="col-lg-3 ">
+                    <img th:src="@{/img/Tailor-img2.jpg}" alt="" style="width: 70%;height: 70%;">
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>6</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start align-self-center mt-2">
+                            <p class="container ms-1">Pembuatan Pakaian</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col-lg-3 -->
+                <div class="col-lg-3 ">
+                    <img th:src="@{/img/Tailor-img9.jpg}" alt="" style="width: 70%; height: 73%;">
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>7</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start align-self-center mt-2">
+                            <p class="container ms-1">Perbaikan Resleting</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col-lg-3 -->
+                <div class="col-lg-3 ">
+                    <img th:src="@{/img/Tailor-img7.jpg}" alt="" style="width: 70%;height: 73%;">
+                    <div class="row ">
+                        <div class="col-2 text-center">
+                            <p style="width: 100%; background-color: #EDB13B;" class="rounded-circle mt-2 ms-5"><strong>8</strong>
+                            </p>
+                        </div>
+                        <div class="col-10 text-start">
+                            <p class="container ms-1 align-self-center mt-2">Pengecilan Celana</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- /.row -->
+
+
+        <!-- START THE FEATURETTES -->
+
+        <!-- <hr class="featurette-divider"> -->
+
+        <!-- /END THE FEATURETTES -->
+
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Jahitan</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+
+<body>
+    <li layout:fragment="link-home">
+        <a class="nav-link" th:href="@{/home}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+    </li>
+
+    <li layout:fragment="link-order">
+        <a class="nav-link active" th:href="@{/order}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-status">
+        <a class="nav-link" th:href="@{/status}">
+            <i class="fas fa-table"></i>
+            <span>Status Pesanan</span></a>
+    </li>
+
+    <li layout:fragment="link-profile">
+        <a class="nav-link" th:href="@{/profile}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span></a>
+    </li>
+    <h1 layout:fragment="heading-name">Order Jahitan</h1>
+
+    <div layout:fragment="content">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h3>Detail Order</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body needs-validation" novalidate>
+                        <label for="exampleInputEmail1" class="form-label">Jenis Jahitan</label>
+                        <div class="mb-3">
+                            <select class="form-select form-control" type="button" aria-label="Jenis Jahitan" id="jenisJahitanId" required>
+                                <option selected disabled value="">Pilih jenis jahitan</option>
+                            </select>
+                            <div class="invalid-feedback" id="jenisJahitan-feedback">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Jumlah</label>
+                            <input type="number" class="form-control" name="kuantitas" id="kuantitas" required>
+                            <div class="invalid-feedback" id="kuantitas-feedback">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Keterangan</label>
+                            <textarea class="form-control" id="keterangan" rows="3" required></textarea>
+
+                        </div>
+                        <button type="button" class="btn btn-primary" id="addButton" onclick="onAdd()">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h3>Orderan Anda</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div>
+                            <ul class="list-group" id="orderList">
+                            </ul>
+                        </div>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-success" disabled id="onAdd" onclick="onOrder()">Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block layout:fragment="script_content">
+            <script th:src="@{/js/ordercustomer/index.js}"></script>
+            <script>
+                function validasiJenisJahitan() {
+                    if ($("#jenisJahitanId").val() == null) {
+                        $("#jenisJahitanId").addClass("is-invalid");
+                        $("#jenisJahitan-feedback").text("Pilih jenis Jahitan");
+                    } else {
+                        $("#jenisJahitanId").removeClass("is-invalid");
+                        $("#jenisJahitanId").addClass("is-valid");
+                    }
+                }
+
+                function validasiKeterangan() {
+                    if ($("#kuantitas").val().length == 0) {
+                        $("#kuantitas").addClass("is-invalid");
+                        $("#kuantitas-feedback").text("tambahkan jumlah pesanan");
+                    } else {
+                        $("#kuantitas").removeClass("is-invalid");
+                        $("#kuantitas").addClass("is-valid");
+                    }
+                }
+                $("#addButton").click(function(e) {
+                    validasiJenisJahitan();
+                    validasiKeterangan();
+                });
+            </script>
+        </th:block>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jahitku</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-NHCvc10juWzjAZVo"></script>
+</head>
+
+<body>
+    <li layout:fragment="link-home">
+        <a class="nav-link" th:href="@{/home}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+    </li>
+
+    <li layout:fragment="link-order">
+        <a class="nav-link" th:href="@{/order}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-status">
+        <a class="nav-link" th:href="@{/status}">
+            <i class="fas fa-table"></i>
+            <span>Status Pesanan</span></a>
+    </li>
+
+    <li layout:fragment="link-profile">
+        <a class="nav-link active" th:href="@{/profile}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span></a>
+    </li>
+    <h1 layout:fragment="heading-name">Status Pesanan</h1>
+
+    <div layout:fragment="content">
+
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h3>Status Pesanan</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped w-100" id="statusTable">
+                    <thead>
+                        <tr>
+                            <th>Order No</th>
+                            <th>Tanggal Order</th>
+                            <th>Estimasi Selesai</th>
+                            <th>Status Pembayaran</th>
+                            <th>Status Pemesanan</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--  Modal Form-->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" layout:fragment="sub_content">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row needs-validation" id="detailForm">
+                        <div class="col-12">
+                            <label for="orderNo" class="form-label">Order No</label>
+                            <input type="text" id="orderNo" name="orderNo" class="form-control">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="Nama" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="nama" name="nama">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="Nama" class="form-label">Jenis Jahitan</label>
+                            <input type="text" class="form-control" id="jenisJahitan" name="jenisJahitan">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="Nama" class="form-label">Kuantitas</label>
+                            <input type="text" class="form-control" id="kuantitas" name="kuantitas">
+                        </div>
+                        <div class="col-12">
+                            <label for="Nama" class="form-label">Keterangan</label>
+                            <input type="text" class="form-control" id="keterangan" name="keterangan">
+                        </div>
+                        <div class="modal-footer mt-3">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Modal Form-->
+    <div class="modal fade" id="orderListModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" layout:fragment="sub_content">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row needs-validation" id="orderListForm">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <h3 id="nomerOrder">No Order</h3>
+                                <h3 id="status">Status</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 mt-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name" disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="tanggalMasuk" class="form-label">Tanggal Masuk</label>
+                            <input class="form-control" type="datetime-local" name="tanggalMasuk" id="tanggalMasuk" disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="tanggalSelesai" class="form-label">Tanggal Selesai</label>
+                            <input class="form-control" type="datetime-local" name="tanggalSelesai" id="tanggalSelesai" disabled>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <label for="jenisJahitan" class="form-label">Jenis Jahitan:</label>
+                            <div class="card-body">
+                                <table class="table table-striped w-100" id="orderModalTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Keterangan</th>
+                                            <th>Jumlah</th>
+                                            <th>Harga</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="formBody">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 mt-3">
+                            <label for="total" class="form-label">Total Rp.</label>
+                            <input type="number" class="form-control" name="total" id="total" disabled="">
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="statusPembayaran" class="form-label">Status Pembayaran</label>
+                            <select class="form-select form-control" id="statusPembayaran" name="statusPembayaran" disabled="">
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-3">
+                            <label for="statusPemesanan" class="form-label">Status Pemesanan</label>
+                            <select class="form-select form-control" id="statusPemesanan" name="statusPemesanan" disabled="">
+
+                            </select>
+                        </div>
+
+                </div>
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <th:block layout:fragment="script_content">
+        <script th:src="@{/js/status/index.js}"></script>
+    </th:block>
+
+</body>
+
+</html>

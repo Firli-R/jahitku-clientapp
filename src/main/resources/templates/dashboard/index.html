@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+
+<body>
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-dashboard">
+        <a class="nav-link" th:href="@{/dashboard}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li layout:fragment="link-order">
+        <a class="nav-link active" th:href="@{/order/admin}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-orderlist">
+        <a class="nav-link" th:href="@{/orderlist}">
+            <i class="fas fa-folder"></i>
+            <span>Order List</span></a>
+    </li>
+
+
+    <li layout:fragment="link-jenisjahitan">
+        <a class="nav-link active" th:href="@{/jenisjahitan}">
+            <i class="fas fa-table"></i>
+            <span>Jenis Jahitan</span></a>
+    </li>
+    <!--    <h1 layout:fragment="heading-name">Status Pesanan</h1>-->
+
+    <div layout:fragment="content">
+
+
+        <div class="card-columns">
+            <div class="card bg-primary">
+                <div class="card-body text-center">
+                    <p class="card-text" style="color:white">Dalam Proses</p>
+                    <h3 id="dalamProses" style="color:white"></h3>
+                </div>
+            </div>
+            <div class="card bg-warning">
+                <div class="card-body text-center">
+                    <p class="card-text" style="color:white">Belum Dikerjakan</p>
+                    <h3 id="belumDikerjakan" style="color:white"></h3>
+                </div>
+            </div>
+            <div class="card bg-warning">
+                <div class="card-body text-center">
+                    <p class="card-text" style="color:white">Butuh Approval</p>
+                    <h3 id="butuhApproval" style="color:white"></h3>
+                </div>
+            </div>
+            <div class="card bg-danger">
+                <div class="card-body text-center">
+                    <p class="card-text" style="color:white">Belum Dibayar</p>
+                    <h3 id="belumDibayar" style="color:white"></h3>
+                </div>
+            </div>
+            <div class="card bg-success">
+                <div class="card-body text-center">
+                    <p class="card-text" style="color:white">Selesai</p>
+                    <h3 id="selesai" style="color:white"></h3>
+                </div>
+            </div>
+            <div class="card bg-info">
+                <div class="card-body text-center">
+                    <p class="card-text" style="color:white">Batal</p>
+                    <h3 id="batal" style="color:white"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h2>Recent Order</h2>
+            <table class="table table-striped w-100" id="recentTable">
+                <thead>
+                    <tr>
+                        <th>Order No</th>
+                        <th>Nama Customer</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Jenis Jahitan</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="card-body">
+            <h2>Unpaid Order</h2>
+            <table class="table table-striped w-100" id="unpaidTable">
+                <thead>
+                    <th>Order No</th>
+                    <th>Nama Customer</th>
+                    <th>Tanggal Masuk</th>
+                    <th>Jenis Jahitan</th>
+                    <th>Status</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <th:block layout:fragment="script_content">
+        <script th:src="@{/js/dashboard/index.js}"></script>
+    </th:block>
+</body>
+
+</html>

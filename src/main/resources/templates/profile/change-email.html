@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+
+<body>
+    <li layout:fragment="link-home">
+        <a class="nav-link active" th:href="@{/home}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+    </li>
+
+    <li layout:fragment="link-order">
+        <a class="nav-link" th:href="@{/order}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-status">
+        <a class="nav-link" th:href="@{/status}">
+            <i class="fas fa-table"></i>
+            <span>Status Pesanan</span></a>
+    </li>
+
+    <li layout:fragment="link-profile">
+        <a class="nav-link active" th:href="@{/profile}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span></a>
+    </li>
+    <h1 layout:fragment="heading-name">Change Email</h1>
+
+    <div layout:fragment="content">
+        <!-- <h1> ini Halaman Profile </h1> -->
+
+        <div class="col-md-6 col-sm-12 card">
+            <form th:action="@{/profile/user/change-email}" th:object="${updateData}" th:method="PUT" class="needs-validation" novalidate>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-md-8 col-sm-6 m-2">
+                        <label for="old-email" class="form-label">Old Email</label>
+                        <input type="text" th:field="*{dataLama}" class="form-control" disabled id="oldEmail" />
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-md-8 col-sm-6 m-2">
+                        <label for="new-email" class="form-label">New Email</label>
+                        <input type="text" th:field="*{dataBaru}" class="form-control" id="newEmail" />
+                        <div class="invalid-feedback" id="email-feedback">
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-8 col-sm-6 text-center">
+                        <button class="btn btn-primary mt-2" type="submit" id="submitButtonEmail">Simpan Pembaruan</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <th:block layout:fragment="script_content">
+        <script>
+            function validasiEmail() {
+                let email = $("#newEmail").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/validationEmail/" + email,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status === "success") {
+                            window.stop();
+                            $("#newEmail").addClass("is-invalid");
+                            $("#email-feedback").text("Email Already Taken");
+                        } else {
+                            $("#newEmail").removeClass("is-invalid");
+                            $("#email").addClass("is-valid");
+                        }
+                    }
+                });
+            }
+            $("#submitButtonEmail").click(function(e) {
+                validasiEmail();
+            });
+        </script>
+        <script th:src="@{/js/profile/updateAcc.js}"></script>
+
+    </th:block>
+</body>
+
+</html>

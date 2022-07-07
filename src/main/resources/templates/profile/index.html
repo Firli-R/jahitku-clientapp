@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/_layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+
+<body>
+    <li layout:fragment="link-home">
+        <a class="nav-link active" th:href="@{/home}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+    </li>
+
+    <li layout:fragment="link-order">
+        <a class="nav-link" th:href="@{/order}">
+            <i class="fas fa-folder"></i>
+            <span>Order Jahitan</span></a>
+    </li>
+
+    <li layout:fragment="link-status">
+        <a class="nav-link" th:href="@{/status}">
+            <i class="fas fa-table"></i>
+            <span>Status Pesanan</span></a>
+    </li>
+
+    <li layout:fragment="link-profile">
+        <a class="nav-link active" th:href="@{/profile}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span></a>
+    </li>
+    <h1 layout:fragment="heading-name">Profile</h1>
+
+    <div layout:fragment="content">
+        <!-- <h1> ini Halaman Profile </h1> -->
+
+        <div class="col-md-6 col-sm-12 card">
+            <form class="needs-validation" novalidate>
+                <div class="row justify-content-center mt-3 ">
+                    <div class="col-md-8 col-sm-6 m-2">
+                        <label for="username" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="nama" required/>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-md-8 col-sm-6 m-2">
+                        <label for="username" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" required/>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-md-8 col-sm-6 m-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" required/>
+                        <div class="invalid-feedback" id="username-feedback">
+                            Username Already Taken
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-md-8 col-sm-6 m-2">
+                        <label for="username" class="form-label">Alamat</label>
+                        <textarea class="form-control" id="alamat" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-8 col-sm-6 text-center">
+                        <button class="btn btn-primary mt-2" type="submit" id="submitButton">Submit</button>
+                        <button class="btn btn-success mt-2" type="button" id="editButton">edit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <th:block layout:fragment="script_content">
+        <script th:src="@{/js/profile/index.js}"></script>
+    </th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+backend:
+getAll=>http://localhost:8083/api/order/admin
+onUpdateOrder=>http://localhost:8083/api/order/{id}
